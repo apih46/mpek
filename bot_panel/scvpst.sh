@@ -1,17 +1,10 @@
 #!/bin/bash
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
-######################### 
+########################
 
-[[ ! -f "/etc/IP" ]] && wget -qO- ipv4.icanhazip.com > /etc/IP
-cekray=`cat /root/log-install.txt | grep -ow "XRAY" | sort | uniq`
-if [ "$cekray" = "XRAY" ]; then
-domen=`cat /etc/xray/domain`
-raycheck='xray'
-else
 domen=`cat /etc/v2ray/domain`
 raycheck='v2ray'
-fi
 
 PID=`ps -ef |grep -v grep | grep sshws |awk '{print $2}'`
 if [[ ! -z ${PID} ]]; then
